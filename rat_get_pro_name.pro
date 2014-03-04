@@ -22,8 +22,9 @@ endif else begin
 	str1 = names[idx]
 endelse
 ret_str=''
-pos1 = strpos(str1,'MAIN')
-if(pos1 gt 0) then ret_str=str1   else begin
+;pos1 = strpos(str1,'MAIN')
+pos1 = strpos(str1,'<')
+if(pos1 lt 0) then ret_str=str1   else begin
 	pos2 = strpos(str1,'<')
 	pos3 = strpos(str1,'(')
 	str2 =strmid(str1,pos2+1,pos3-pos2-1)

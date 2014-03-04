@@ -2,6 +2,7 @@ pro rat_ncdf_read,ncfile,list1,__silent=__silent,stop1=stop1
 if(~file_test(ncfile)) then begin
 	print,"_________________________________________________"
 	message,'		ERROR: FILE DOES NOT EXIST'
+	print,"_________________________________________________"
 endif
 if(n_elements(list1) eq 0) then begin
 	nc1 =  ncdf_open(ncfile)
