@@ -55,6 +55,7 @@ endcase
 if(KEYWORD_SET(colors_13)) then rat_load_12ch_colors
 if(KEYWORD_SET(qual12)) then rat_load_qual12_colors
 if(KEYWORD_SET(qual7)) then rat_load_qual07_colors
-;loadct,file='/omihome/rtiruchi/IDL_LIBR/colors/brewer.tbl'
+home_dir = getenv('HOME')
+;loadct,file=home_dir+'/IDL_LIBR/colors/brewer.tbl'
 
 end

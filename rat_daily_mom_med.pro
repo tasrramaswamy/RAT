@@ -103,7 +103,7 @@ endif else begin
 	sig_val = sig_val_t
 	mad =mad_t
 	manabsdev1 = meanabsdev1_t
-	std_dev_med = std_dev_t
+	std_dev = std_dev_t
 	dev_med = dev_med_t
 	n_dev_med = n_dev_med_t
 endelse

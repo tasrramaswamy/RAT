@@ -13,13 +13,15 @@ nparam1 = n_params(0)
 cd , current=curr_dir1
 curr_dir1 = curr_dir1+'/'
 
+home_dir= getenv('HOME')
+
 ;print,curr_dir1
 ;stop
 case nparam1 of 
 
 0 : begin
 	STR1='*.pro'
-	DIR='/omihome/rtiruchi/IDL_LIBR/RAT/'
+	DIR=home_dir+'/IDL_LIBR/RAT/'
     end
 
 1 : begin
