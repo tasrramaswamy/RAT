@@ -1,7 +1,7 @@
 pro rat_plot_13ch_4c,X1,Y1,$
 	dev=dev,ps_name=ps_name,ps_append=ps_append,$
 	xtit=xtit,ytit=ytit,tit=tit,xlabel=xlabel, leg=leg,$
-	colors=colors,ct=ct,xrange=xrange,yrange=yrange,lines=lines1,$
+	colors=colors,ct=ct,xrange=xrange,yrange=yrange,lines=lines,$
 	xmin=xmin,ymin=ymin,xtick=xtick,ytick=ytick,ps_open=ps_open,$
 	linet=linet
 	
@@ -54,7 +54,7 @@ if (~KEYWORD_SET(tit)) then tit=!P.title
 
 if ~KEYWORD_SET(colors) then $
 	COLORS = [ fltarr(3)+1,fltarr(3)+2, fltarr(3)+3, fltarr(3)+5, 4 ]
-if ~KEYWORD_SET(lines) then lines1 = indgen(13) mod 3
+if ~KEYWORD_SET(lines) then lines = indgen(13) mod 3
 
 dev=STRUPCASE(dev)
 
@@ -85,9 +85,9 @@ PLOT,X,Y(*,0),/nodata,/noerase,xtitle=xtit,ytitle=ytit,title=tit,$
 	xrange=xrange,yrange=yrange,xticks=xtick,yticks=ytick,$
 	xminor=xmin,yminor=ymin,xtickn=xlabel,xstyle=xstyle1,ystyle=ystyle1
 for i=0,n_ch-1 do $
-	oplot,x,y(*,i),color=colors(i),lines=lines1(i),thick=thick1
+	oplot,x,y(*,i),color=colors(i),lines=lines(i),thick=thick1
 
- legend,leg,colors=colors(0:n_ch-1),linestyle=lines1(0:n_ch-1)
+ legend,leg,colors=colors(0:n_ch-1),linestyle=lines(0:n_ch-1)
 	
 if (dev ne 'X') then begin
 	if(KEYWORD_SET(ps_open) or KEYWORD_SET(ps_append)) then begin

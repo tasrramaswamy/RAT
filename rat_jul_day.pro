@@ -1,5 +1,8 @@
 function rat_jul_day, year,month,day,hour,min,sec
 ;   This function calculates the julian day in decimal.
+
+;Revision:
+;Change float to double for accuracy
 nparams=n_params()
 
 case nparams of 
@@ -13,6 +16,7 @@ case nparams of
 	sec = 0.0
    end	
 5: sec=0.0
+else: dummy =0 
 endcase
 
 daynum=0.0
@@ -24,6 +28,7 @@ k=0
 if (is_leapyr(year)) then k=1
 jday=day+ldpmon((month-1),k)
 
-daynum=float(hour)/24.0+float(min)/1440.0+float(sec)/86400.0+jday
+;daynum=float(hour)/24.0+float(min)/1440.0+float(sec)/86400.0+jday
+daynum=double(hour)/24.0+double(min)/1440.0+double(sec)/86400.0+jday
 return, daynum
 end

@@ -7,24 +7,19 @@
 function rat_get_pro_name, level,stop1=stop1
 
 
-;get the name of IDL routines from help command.
-;The names are stored in a stack, which means most recent IDL routine name 
-; is in the top
-help,calls=level_name_stack,/traceback
-n_levels = n_elements(level_name_stack)-1
 
-;Exclude the name of current IDL routine , and reverse the order of stack(recent item on top) 
-; and store in an array
-
-names_arr = reverse(level_name_stack[1:n_levels])
+help,calls=level_name,/traceback
+n_levels = n_elements(level_name)-1
+names = level_name[1:n_levels]
 np = n_params()
 if(np eq 0) then inp=-1 else inp=level
 if(inp eq 0) then inp=-1
-
-
-if(inp le 0) then str1 =names_arr[inp] else begin
-	idx = inp+1
-	str1 = names_arr[idx]
+if(inp le 0) then begin
+	idx = (n_levels + inp) >0
+	str1 =names[idx]
+endif else begin
+	idx = (inp-1 ) < (n_levels-1)
+	str1 = names[idx]
 endelse
 ret_str=''
 ;pos1 = strpos(str1,'MAIN')

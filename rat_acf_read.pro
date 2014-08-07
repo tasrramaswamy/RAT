@@ -1,4 +1,5 @@
 pro rat_acf_read,fname,x1,x2,x3,x4,x5,x6,x7,n_lines=n_lines,$
+	start=start,$
 	stop1=stop1
 
 ;+
@@ -8,11 +9,11 @@ pro rat_acf_read,fname,x1,x2,x3,x4,x5,x6,x7,n_lines=n_lines,$
 ; ##04/25/12 Tranpose the last variable if it contains only one column
 para=N_params()
 no_para = para-1	; Number of variables (parameters) called from main program
-
+if(n_elements(START) eq 0 ) then d_start =0 else d_start = start-1
 idx_para = indgen(no_para-1) ; index of the called variables, except last variable
 
 
-DATA = READ_ASCII(fname,COMMENT=';')
+DATA = READ_ASCII(fname,COMMENT=';',data_start=d_start)
 
 D=DATA.(0)
 
@@ -50,5 +51,6 @@ case i of
 6:	x7= extra_val
 endcase
 
+n_lines=n_elements(x1)
 if(KEYWORD_SET(stop1)) then stop
 end
