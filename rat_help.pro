@@ -2,6 +2,9 @@ pro rat_help,fname
 ;+
 ;This program prints the COMMENT lines that are enclosed between markers ";+" and ";-"
 ;-
+hdir= getenv('HOME')
+new_dir=hdir+'/IDL_LIBR/RAT/'
+CD,new_dir,current=old_dir
 openr,lun,fname,/get_lun
 ;openw,lun_out,'rat_help.tmp',/get_lun
 a=''
@@ -31,7 +34,7 @@ if(kount_lines gt 15) then begin
 	break
 endif
 endwhile
-
+CD,old_dir
 free_lun,lun
 ;stop
 end

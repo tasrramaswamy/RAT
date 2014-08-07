@@ -14,7 +14,12 @@ pro rat_refresh_dev,dev_id,PS_name=ps_name, x_name=x_name, x_no=x_no ,$
 	x_size=x_size,y_size=y_size, ct=ct
 np=n_params()
 if(np eq 0) then begin
-	if(strupcase(!D.name) eq 'X') then dev_id = 0 else dev_id=1
+	;	if(strupcase(!D.name) eq 'X') then dev_id = 0 else dev_id=1
+	case strupcase(!D.NAME) of
+		'PS':dev_id=1
+		'Z':dev_id=2
+		else:dev_id=0
+	endcase
 endif
 if (KEYWORD_SET(X_SIZE) eq 0) then x_size=800
 if (KEYWORD_SET(y_SIZE) eq 0) then y_size=600
@@ -48,9 +53,14 @@ end
 			make_ps,ps_name
 			loadct,ct
 		endelse
-	endelse
-end
-
+		endelse
+	end
+2: begin
+	set_plot,'Z'
+	if (KEYWORD_SET(ct) eq 0) then ct =39
+	device,set_resolution=[w_xsiz,w_ysiz]
+	loadct,ct
+	end
 endcase
 if(KEYWORD_SET(colors_13)) then rat_load_12ch_colors
 if(KEYWORD_SET(qual12)) then rat_load_qual12_colors
