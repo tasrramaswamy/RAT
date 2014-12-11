@@ -11,7 +11,7 @@
 ;-
 pro rat_refresh_dev,dev_id,PS_name=ps_name, x_name=x_name, x_no=x_no ,$
 	append=append,colors_13 = colors_13,qual12=qual12 , qual7=qual7,$
-	x_size=x_size,y_size=y_size, ct=ct
+	x_size=x_size,y_size=y_size, ct=ct,orient=orient
 np=n_params()
 if(np eq 0) then begin
 	;	if(strupcase(!D.name) eq 'X') then dev_id = 0 else dev_id=1
@@ -36,7 +36,7 @@ end
 	if (KEYWORD_SET(ct) eq 0) then ct =40
 	if (!D.unit eq 0 ) then begin ; NO open PS FIle
 		if(~keyword_set(ps_name)) then ps_name='idl.ps'
-		make_ps,ps_name,ct=ct
+		make_ps,ps_name,orient,ct=ct
 	endif else begin ; if any PS file is open
 	;	stop
 		r=fstat(!D.UNIT)
@@ -50,7 +50,7 @@ end
 		pos = strpos(c_fname,ps_name)
 		if(pos ge 0 and KEYWORD_SET(append)) then rat_erase else begin
 			device,/close
-			make_ps,ps_name
+			make_ps,ps_name,orient
 			loadct,ct
 		endelse
 		endelse
@@ -58,7 +58,7 @@ end
 2: begin
 	set_plot,'Z'
 	if (KEYWORD_SET(ct) eq 0) then ct =39
-	device,set_resolution=[w_xsiz,w_ysiz]
+	device,set_resolution=[x_size,y_size]
 	loadct,ct
 	end
 endcase

@@ -1,4 +1,4 @@
-pro rat_acf_read,fname,x1,x2,x3,x4,x5,x6,x7,n_lines=n_lines,$
+pro rat_acf_read,fname,x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,n_lines=n_lines,$
 	stop1=stop1
 
 ;+
@@ -18,6 +18,7 @@ D=DATA.(0)
 
 data_dim = size(D,/dimensions)
 n_rows = data_dim[0]
+n_lines = data_dim[1]
 
 idx_rows_data = indgen(n_rows)
 
@@ -33,6 +34,10 @@ for i= 0 , no_para-2 do begin
 	3:	x4=temp
 	4:	x5=temp
 	5:	x6=temp
+	6:	x7=temp
+	7:	x8=temp
+	8:	x9=temp
+	9:	x10=temp
 	endcase
 
 endfor
@@ -48,6 +53,9 @@ case i of
 4:	x5 = extra_val
 5:	x6 = extra_val
 6:	x7= extra_val
+7:	x8= extra_val
+8:	x9= extra_val
+9:	x10= extra_val
 endcase
 
 if(KEYWORD_SET(stop1)) then stop
